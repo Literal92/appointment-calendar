@@ -1,0 +1,35 @@
+<div class="flex items-center pt-3 mx-auto" class="relative">
+  <table class="border w-full">
+    <thead class="border">
+      <tr>
+        <th *ngFor="let day of daysOfWeek">
+          <p class="pt-3 flex justify-center items-center text-base font-medium  text-pale-gray">{{ day }}</p>
+        </th>
+      </tr>
+    </thead>
+    <tbody cdkDropListGroup>
+      <tr class="border" *ngFor="let week of weeks; let i = index">
+        <td class="pt-1 border" style="max-width: 2.5rem;" *ngFor="let day of week" cdkDropList [cdkDropListData]="day.date"
+          (cdkDropListDropped)="onDrop($event)">
+          <div (click)="openAppointmentForm(day.date)"
+            class="py-16 px-2 cursor-pointer flex justify-center items-start">
+            {{ day.day }}
+          </div>
+          <div *ngIf="day.date" class="cursor-pointer">
+            <div *ngFor="let appointment of onGetAppointment(day.date)" cdkDrag
+              (cdkDragStarted)="onDragStarted($event, appointment)">
+              <div class="text-center">
+                <div class="bg-fuchsia-300 relative">
+                  <span (click)="onDeleteAppointment(appointment.id)" class="absolute top-0 end-0 pe-1">
+                    <mat-icon aria-hidden="false" aria-label="Creat" fontIcon="delete"></mat-icon>
+                  </span>
+                  <p>{{ appointment.title }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Add Appointment</h2>
+<mat-dialog-content>
+  <form [formGroup]="appointmentForm" class="flex flex-col gap-5 items-center rounded-md">
+    <mat-form-field class="w-[250px]">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="Spicker" formControlName="startTime">
+      <mat-datepicker-toggle matIconSuffix [for]="Spicker"></mat-datepicker-toggle>
+      <mat-datepicker #Spicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="Epicker" formControlName="endTime">
+      <mat-datepicker-toggle matIconSuffix [for]="Epicker"></mat-datepicker-toggle>
+      <mat-datepicker #Epicker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="appointmentForm.invalid"
+    cdkFocusInitial>Save</button>
+  <button mat-button (click)="onClose()">Close</button>
+</mat-dialog-actions>
